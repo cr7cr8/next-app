@@ -3,10 +3,12 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 import { Button } from "@mui/material"
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { Context, ContextProvider } from "../ContextProvider"
 
 import Link from "next/link"
+
+
 
 export default function Home() {
 
@@ -14,6 +16,44 @@ export default function Home() {
   const { count, setCount } = useContext(Context)
 
 
+  useEffect(function () {
+
+    console.log("xxx")
+    // console.log(requestAnimationFrame)
+
+
+    function wrapCallingTime(fn) {
+
+      let timeStamp = 0
+
+      return function () {
+
+
+        requestAnimationFrame(function (time) {
+
+          if ((time - timeStamp) > 2000) {
+            fn(time, timeStamp)
+            timeStamp = time
+          }
+          else {
+            console.log("not")
+          }
+
+        })
+
+
+      }
+    }
+
+    const fn = wrapCallingTime((t, t2) => { console.log(t, t2, t - t2) })
+
+    // setInterval(() => {
+    //     fn()
+    // }, 10);
+
+
+
+  }, [])
 
 
   return (
