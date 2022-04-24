@@ -6,21 +6,56 @@ const express = express_()
 
 const cors = require("cors")
 
+
+
 const dev = process.env.NODE_ENV !== 'production'
-const hostname = 'localhost'
+const hostname = '192.168.0.100'
 const port = 3000
-// when using middleware `hostname` and `port` must be provided below
+//when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port })
 const handle = app.getRequestHandler()
 
 
-console.log(">> Process.env.NODE_ENV = "+process.env.NODE_ENV)
+const cookieParser = require('cookie-parser')
+
+
+const { authenticateToken, generateAndDispatchToken, checkingToken } = require("./middware/auth")
+
+const cookieApi = require("./router/cookieApi")
+
+
+console.log(">> Process.env.NODE_ENV = " + process.env.NODE_ENV, process.env.PORT || port)
 
 app.prepare().then(
 
     () => {
         express.disable('x-powered-by');
         express.use(cors({}))
+        express.use(cookieParser('cookieSecretKey'))
+
+
+        // express.get('/api/usercookie', (req, res) => {
+        //     res.cookie('userCookie', { userName: "user-" + Date.now() }, {
+        //         maxAge: 1000 * 60 * 60 * 24 * 365,
+        //         httpOnly: true,
+        //         signed: true
+        //     });
+        //     res.json("cookieSent")
+        // })
+
+        // express.delete('/api/usercookie', (req, res) => {
+
+
+        //     res.cookie('userCookie', { userName: "user-" + Date.now() }, {
+        //         maxAge: 0,
+        //         httpOnly: true,
+        //         signed: true
+        //     });
+        //     res.json("cookieDelete")
+        // })
+
+
+        express.use('/api/userCookie', cookieApi)
 
         express.get('/api/*', (req, res) => {
             res.send("api-----dd--")
@@ -29,6 +64,83 @@ app.prepare().then(
         express.get('/api', (req, res) => {
             res.send("api")
         })
+
+
+        express.get(/(^\/$)|(^\/home$)/i,
+            function (req, res, next) {
+
+
+
+                if (!(req?.signedCookies?.userCookie?.userName)) {
+                    // res.cookie('userCookie', { name: "user" + Date.now() }, {
+                    //     maxAge: 1000 * 60 * 60 * 24 * 365,
+                    //     httpOnly: true,
+                    //     signed: true
+                    // });
+
+
+                    app.render(req, res, "/LoginPage", {})
+                }
+                else {
+
+
+                    console.log(req.signedCookies)
+
+
+                    app.render(req, res, "/Home", {})
+
+                }
+
+            }
+
+
+        )
+
+
+        // express.get(/(^\/$)|(^\/home$)/i,
+        //     checkingToken(
+        //         function (req, res, next) {
+        //             // console.log(req.cookies)
+
+        //             console.log(cookieParser.JSONCookie({ "aaa": 111, "bbb": 222 }))
+
+
+        //             console.log(req.signedCookies)
+        //             //  res.cookie('cookieName', 'cookie-'+Date.now(), { signed: true })
+        //             res.cookie('signedCookieObj', { a: 1, b: 2 }, {
+        //                 maxAge: 1000 * 60 * 60 * 24 * 365, // would expire after 15 minutes
+        //                 httpOnly: true, // The cookie only accessible by the web server
+        //                 signed: true // Indicates if the cookie should be signed
+        //             });
+        //             app.render(req, res, "/Home", {})
+        //         },
+        //         function (req, res, next) {
+
+        //             app.render(req, res, "/LoginPage", {})
+
+        //         }
+
+        //     ),
+        //     (req, res, next) => {
+        //         console.log("home page", req.params)
+        //         app.render(req, res, "/PersonPage", {})
+        //     }
+        // )
+
+
+        // express.get(/(^\/$)|(^\/home$)/i, (req, res, next) => {
+        //     console.log("home page", req.params)
+        //     app.render(req, res, "/", {})
+        // })
+
+        // express.get("/",(req,res,next)=>{
+        //     console.log("home page",req.params)
+        //     app.render(req, res, "/", {})
+        // })
+
+
+
+
         // express.use('/ttt', (req, res) => {
         //     app.render(req, res, "/", {aa:"fff"})
         // })
@@ -46,7 +158,7 @@ app.prepare().then(
 
 express.listen(process.env.PORT || port, (err) => {
     if (err) throw err
-    console.log('>> Ready on http://localhost:3000')
+    console.log(`>> Ready on ${hostname}:${process.env.PORT || port}`)
 })
 
 
