@@ -14,7 +14,7 @@ const app = next({ dev, hostname, port })
 const handle = app.getRequestHandler()
 
 
-
+console.log(">> Process.env.NODE_ENV = "+process.env.NODE_ENV)
 
 app.prepare().then(
 
@@ -46,7 +46,7 @@ app.prepare().then(
 
 express.listen(process.env.PORT || port, (err) => {
     if (err) throw err
-    console.log('> Ready on http://localhost:3000')
+    console.log('>> Ready on http://localhost:3000')
 })
 
 

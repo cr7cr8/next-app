@@ -14,7 +14,7 @@ export async function getStaticProps(context) {
 
   const { params, query } = context
 
-
+  console.log(Date.now())
 
   return {
     props: {},
