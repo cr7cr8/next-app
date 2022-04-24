@@ -14,9 +14,6 @@ export async function getServerSideProps(context) {
 
     delete query.otherProps
 
-
-    console.log(context)
-
     return {
         props: { queryObj: query, paramArr: params.otherProps }, // will be passed to the page component as props
     }
@@ -39,17 +36,21 @@ export default function Other({ paramArr, queryObj }) {
 
     return (
 
-        <>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center",flexDirection:"column",backgroundColor:"wheat",height:"80vh" }}>
             <h1>404</h1>
-            {paramArr.map((item, index) => <b key={index}>{item}&nbsp;</b>)}
-            <br />
-            {JSON.stringify(queryObj)}
 
-            {/* <Link href="/" ><h1>go to Home {count}</h1></Link>
+            <div>
+                {paramArr.map((item, index) => <b key={index}>{item}&nbsp;</b>)}
+            </div>
+
+            <div>
+                {JSON.stringify(queryObj)}
+            </div>
+            <Link href="/" ><h1>go to Home {count}</h1></Link>
             <Button variant="contained" onClick={function () {
                 setCount(pre => pre + 1)
-            }}>add</Button> */}
-        </>
+            }}>add</Button>
+        </div>
 
     )
 }

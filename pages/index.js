@@ -36,7 +36,7 @@ export default function Home() {
 
     <div className={styles.container}>
 
-      <Link href="/aboyut"><h1>go to about {count}</h1></Link>
+      <Link href="/about"><h1>go to about {count}</h1></Link>
       <Button variant="contained" onClick={function () {
         setCount(pre => pre + 1)
       }}>add</Button>
