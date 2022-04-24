@@ -15,7 +15,7 @@ export default function About() {
     return (
 
         <>
-            <Link href="/" ><h1>go to Home {count}</h1></Link>
+            <Link href="/" ><h1>About page, go to Home {count}</h1></Link>
             <Button variant="contained" onClick={function () {
                 setCount(pre => pre + 1)
             }}>add</Button>

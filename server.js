@@ -4,6 +4,8 @@ const next = require('next')
 const express_ = require("express")
 const express = express_()
 
+const cors = require("cors")
+
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = 'localhost'
 const port = 3000
@@ -11,30 +13,31 @@ const port = 3000
 const app = next({ dev, hostname, port })
 const handle = app.getRequestHandler()
 
-// express.get("/abab",function(req,res,next){
-//     res.send(String(Date.now()))
-// })
 
 
-// express.get("*", function (req, res, next) {
-//     //   res.send(String(Date.now()))
-//     console.log("xxdd")
-//     handle(req, res, "/")
-// })
 
 app.prepare().then(
 
     () => {
+        express.disable('x-powered-by');
+        express.use(cors({}))
 
         express.get('/api/*', (req, res) => {
-            res.send("apiaaa")
+            res.send("api-----dd--")
         })
+
+        express.get('/api', (req, res) => {
+            res.send("api")
+        })
+        // express.use('/ttt', (req, res) => {
+        //     app.render(req, res, "/", {aa:"fff"})
+        // })
+
+        // app.render(req, res, actualPage, queryParams)
 
         express.get('*', (req, res) => {
             return handle(req, res)
         })
-
-
 
     }
 )
