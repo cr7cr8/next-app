@@ -13,13 +13,26 @@ import Link from "next/link"
 import axios from "axios"
 import { useRouter } from 'next/router';
 
+import myImageSrc from "../public/vercel.svg";
+
+
+// export async function getStaticPaths() {
+//   return {
+//     paths: [
+//       { params: { ttt: 1 } }, { params: { ttt: 2 } }
+
+//     ],
+//     fallback: false // false or 'blocking'
+//   };
+// }
 
 export async function getStaticProps(context) {
 
 
-  const { params, query } = context
+  //const { params, query } = context
 
-  //console.log(Date.now())
+
+  console.log("HOME========", context)
 
   return {
     props: {},
@@ -41,7 +54,7 @@ export default function Home() {
 
     <div className={styles.container}>
 
-      <Button  onClick={function () {
+      <Button onClick={function () {
         axios.delete("/api/usercookie").then(response => {
 
           router.replace("/")
@@ -54,7 +67,7 @@ export default function Home() {
 
 
       <Link href="/About"><h1>go to about {count}</h1></Link>
-      <Button  onClick={function () {
+      <Button onClick={function () {
         setCount(pre => pre + 1)
       }}>add</Button>
 
@@ -115,6 +128,7 @@ export default function Home() {
           Powered by{' '}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+            {/* <img src={ myImageSrc.src  } style={{width:100,height:100}} /> */}
           </span>
         </a>
       </footer>
