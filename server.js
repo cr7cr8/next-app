@@ -34,26 +34,7 @@ app.prepare().then(
         express.use(cookieParser('cookieSecretKey'))
 
 
-        // express.get('/api/usercookie', (req, res) => {
-        //     res.cookie('userCookie', { userName: "user-" + Date.now() }, {
-        //         maxAge: 1000 * 60 * 60 * 24 * 365,
-        //         httpOnly: true,
-        //         signed: true
-        //     });
-        //     res.json("cookieSent")
-        // })
-
-        // express.delete('/api/usercookie', (req, res) => {
-
-
-        //     res.cookie('userCookie', { userName: "user-" + Date.now() }, {
-        //         maxAge: 0,
-        //         httpOnly: true,
-        //         signed: true
-        //     });
-        //     res.json("cookieDelete")
-        // })
-
+   
  
         express.use('/api/userCookie', cookieApi)
 
@@ -69,24 +50,11 @@ app.prepare().then(
         express.get(/(^\/$)|(^\/home$)/i,
             function (req, res, next) {
 
-
-
                 if (!(req?.signedCookies?.userCookie?.userName)) {
-                    // res.cookie('userCookie', { name: "user" + Date.now() }, {
-                    //     maxAge: 1000 * 60 * 60 * 24 * 365,
-                    //     httpOnly: true,
-                    //     signed: true
-                    // });
-
-
                     app.render(req, res, "/LoginPage", {})
                 }
                 else {
-
-
                     console.log(req.signedCookies)
-
-
                     app.render(req, res, "/Home", {})
 
                 }

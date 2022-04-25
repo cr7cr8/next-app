@@ -1,5 +1,3 @@
-
-
 import React, { useContext } from "react"
 import { Context, ContextProvider } from "../ContextProvider"
 

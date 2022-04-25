@@ -4,6 +4,9 @@ import styles from '../styles/Home.module.css'
 
 import { Button } from "@mui/material"
 import React, { useContext, useEffect } from "react"
+
+
+
 import { Context, ContextProvider } from "../ContextProvider"
 
 import Link from "next/link"
@@ -38,7 +41,7 @@ export default function Home() {
 
     <div className={styles.container}>
 
-      <Button variant="contained" onClick={function () {
+      <Button  onClick={function () {
         axios.delete("/api/usercookie").then(response => {
 
           router.replace("/")
@@ -51,7 +54,7 @@ export default function Home() {
 
 
       <Link href="/about"><h1>go to about {count}</h1></Link>
-      <Button variant="contained" onClick={function () {
+      <Button  onClick={function () {
         setCount(pre => pre + 1)
       }}>add</Button>
 
