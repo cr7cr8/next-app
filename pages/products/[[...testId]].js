@@ -12,17 +12,18 @@ import { useRouter } from 'next/router'
 
 export async function getStaticPaths(context) {
 
+
     return {
         paths: [
-            { params: { testId: ["111","222"] } }
+            { params: { testId: ["111", "222"] } }
         ],
-        fallback: true // false or 'blocking'
+        fallback: "blocking" // false or 'blocking'
     };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, ...other }) {
 
-    console.log(params)
+    console.log(other)
     return {
         props: {
             params
@@ -47,7 +48,7 @@ export default function Products({ params }) {
     }, [])
 
     if (router.isFallback) {
-        return <div>Loading...</div>
+        return <div>Loading...</div> //not expected to render due to fallback is "blocking" not true
     }
 
 
