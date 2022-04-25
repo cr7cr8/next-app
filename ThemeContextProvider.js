@@ -6,7 +6,7 @@ import { Button, CssBaseline, Switch, Typography } from '@mui/material';
 
 
 
-export default function ThemeContextProvider(props) {
+export default function ThemeContextProvider({ cssBaseLine = true, ...props }) {
 
 
     const [sizeObj, setSizeObj] = useState(props.sizeObj || { xs: "1.5rem", sm: "1.5rem", md: "1.5rem", lg: "1.5rem", xl: "1.5rem" })
@@ -43,7 +43,7 @@ export default function ThemeContextProvider(props) {
 
 
 
-    const [mode, setMode] = React.useState('light');
+    const [mode, setMode] = React.useState(props.mode || 'light');
     const myTheme = React.useMemo(
         () =>
             createTheme({
@@ -68,37 +68,13 @@ export default function ThemeContextProvider(props) {
                 isLight: mode === "light",
                 isDark: mode === "dark",
                 components: {
-                    // MuiTypography: {
-                    //   styleOverrides: {
-                    //     root: ({ ownerState, theme, ...props }) => {
-                    //      //alert(JSON.stringify(props))
-                    //       return [
-                    //         ownerState.variant === 'body2' &&
-                    //         sx({
-                    //           fontSize: theme.sizeObj,
-                    //         }),
 
-                    //       ]
-                    //     }
-                    //   }
-                    // },
                     MuiButton: {
                         defaultProps: {
                             variant: "contained",
                             disableRipple: false,
                         },
-                        // styleOverrides: {
-                        //     root: ({ ownerState, theme, ...props }) => {
 
-                        //         return [
-                        //             //  ownerState.variant === 'body2' &&
-                        //             sx({
-                        //                 textTransform: 'none'
-                        //             }),
-
-                        //         ]
-                        //     }
-                        // }
                     },
                     MuiPaper: {
                         defaultProps: {
@@ -141,7 +117,7 @@ export default function ThemeContextProvider(props) {
     return (
 
         <ThemeProvider theme={myTheme}>
-            <CssBaseline />
+            {cssBaseLine && <CssBaseline />}
             {props.children}
         </ThemeProvider>
 

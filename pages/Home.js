@@ -53,7 +53,7 @@ export default function Home() {
 
 
 
-      <Link href="/about"><h1>go to about {count}</h1></Link>
+      <Link href="/About"><h1>go to about {count}</h1></Link>
       <Button  onClick={function () {
         setCount(pre => pre + 1)
       }}>add</Button>
