@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken")
 
-
+//next dev --port $PORT
 
 function checkingToken(noToken, tokenFailFn, tokenPassFn) {
 
