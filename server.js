@@ -34,11 +34,11 @@ app.prepare().then(
         express.use(cookieParser('cookieSecretKey'))
 
 
-   
- 
+
+
         express.use('/api/userCookie', cookieApi)
 
-        express.use('/api/404',function(req,res){
+        express.use('/api/404', function (req, res) {
 
             res.status(403).send("404")
 
@@ -60,14 +60,20 @@ app.prepare().then(
                     app.render(req, res, "/LoginPage", {})
                 }
                 else {
-                 //   console.log(req.signedCookies)
+                    //   console.log(req.signedCookies)
+                 
                     app.render(req, res, "/Home", {})
-
                 }
+            }
+        )
+
+        express.get("/person",
+            function (req, res, next) {
+                req.dataObj = 3333333333
+
+                app.render(req, res, "/PersonPage", {})
 
             }
-
-
         )
 
 
@@ -125,15 +131,22 @@ app.prepare().then(
             return handle(req, res)
         })
 
+
+        express.listen(process.env.PORT || port, (err) => {
+            if (err) throw err
+            console.log(`>> Ready on ${hostname}:${process.env.PORT || port}`)
+        })
+
+
     }
 )
 
 
 
-express.listen(process.env.PORT || port, (err) => {
-    if (err) throw err
-    console.log(`>> Ready on ${hostname}:${process.env.PORT || port}`)
-})
+// express.listen(process.env.PORT || port, (err) => {
+//     if (err) throw err
+//     console.log(`>> Ready on ${hostname}:${process.env.PORT || port}`)
+// })
 
 
 

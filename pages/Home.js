@@ -11,7 +11,7 @@ import { Context, ContextProvider } from "../ContextProvider"
 
 import Link from "next/link"
 import axios from "axios"
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 
 import myImageSrc from "../public/vercel.svg";
 
@@ -33,10 +33,23 @@ export async function getStaticProps(context) {
 
 
   //console.log("HOME========", context)
+  // const random = Math.random()
+  // console.log(random)
+  // if (random > 0.5) {
+
+  
+  //   return {
+  //     redirect: {
+  //       destination: '/api',
+  //       permanent: false,
+  //     },
+  //   }
+  // }
+
 
   return {
     props: {},
-    revalidate: 10
+   // revalidate: 10
   }
 
 }
@@ -46,7 +59,7 @@ export async function getStaticProps(context) {
 
 export default function Home() {
 
-
+  console.log("home")
   const { count, setCount } = useContext(Context)
   const router = useRouter();
 
@@ -62,7 +75,9 @@ export default function Home() {
       <Button onClick={function () {
         axios.delete("/api/usercookie").then(response => {
 
-          router.replace("/")
+          //router.replace("/")
+
+          Router.replace("/")
         })
       }}>Delete Cookie</Button>
 
@@ -89,12 +104,12 @@ export default function Home() {
       <Image loader={myLoader}
         src="https://wx3.sinaimg.cn/mw690/006nD01hgy1h1ls8p0fjoj32c02c04qq.jpg"
         placeholder={"blur"}
-      //  alt="iiiaa"
+        //  alt="iiiaa"
         blurDataURL="https://picsum.photos/200/300"
         unoptimized
         width={330}
         height={430}
-        style={{backgroundColor: "pink"}}
+        style={{ backgroundColor: "pink" }}
         objectFit='contain'
         objectPosition='0px 0px'
         referrerPolicy='no-referrer'

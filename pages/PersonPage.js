@@ -8,6 +8,14 @@ import Link from "next/link"
 import { useRouter } from 'next/router';
 
 
+export async function getServerSideProps(context) {
+
+    console.log("===>>> req", context.req.dataObj)
+
+    return {
+        props: {},
+    }
+}
 
 export default function PersonPage() {
 
@@ -25,3 +33,8 @@ export default function PersonPage() {
 
     )
 }
+
+
+
+
+
