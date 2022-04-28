@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-import { Button } from "@mui/material"
+import { Button, Box } from "@mui/material"
 import React, { useContext, useEffect } from "react"
 
 
@@ -50,6 +50,11 @@ export default function Home() {
   const { count, setCount } = useContext(Context)
   const router = useRouter();
 
+  const myLoader = ({ src }) => {
+    // return `${API}/user/photo/${blog.postedBy.username}`;
+    return src
+  }
+
   return (
 
     <div className={styles.container}>
@@ -63,7 +68,24 @@ export default function Home() {
 
 
 
-
+      <Box sx={{//backgroundColor:"skyblue",
+        position: "relative", width: "200px", height: "200px"
+      }}>
+        <Image loader={myLoader}
+          src="https://wx3.sinaimg.cn/mw690/006nD01hgy1h1ls8p0fjoj32c02c04qq.jpg"
+          placeholder='blur'
+          alt="iiiaa"
+          blurDataURL="https://picsum.photos/200/300"
+          // unoptimized
+          // width={200}
+          // height={600}
+          // style={{backgroundColor: "pink"}}
+          layout='fill'
+          objectFit='cover'
+          objectPosition='0px 0px'
+          referrerPolicy='no-referrer'
+        />
+      </Box>
 
 
       <Link href="/About"><h1>go to about {count}</h1></Link>
@@ -127,12 +149,25 @@ export default function Home() {
         >
           Powered by{' '}
           <span className={styles.logo}>
-            <Image src="/vercel.svg" placeholder='blur' blurDataURL='/' alt="Vercel Logo" width={72} height={16} />
+            <Image src="/vercel.svg"
+              loader={myLoader}
+              placeholder='blur'
+              blurDataURL="/"
+              alt="Vercel Logo" width={72} height={16}
+            />
+
+
             {/* <img src={ myImageSrc.src  } style={{width:100,height:100}} /> */}
             {/* <img src={"/vercel.svg"} style={{ width: 100, height: 100 }} /> */}
           </span>
         </a>
       </footer>
+
+
+      {/* <img src="https://wx4.sinaimg.cn/mw690/006eW3CSly1h1mcu82qnsj322m340kjl.jpg"
+        width={"100%"} height={"100%"} referrerPolicy='no-referrer' /> */}
+
+
     </div>
 
   )

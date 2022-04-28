@@ -38,6 +38,12 @@ app.prepare().then(
  
         express.use('/api/userCookie', cookieApi)
 
+        express.use('/api/404',function(req,res){
+
+            res.status(403).send("404")
+
+        })
+
         express.get('/api/*', (req, res) => {
             res.send("api-----dd--")
         })
