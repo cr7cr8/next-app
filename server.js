@@ -60,7 +60,7 @@ app.prepare().then(
                     app.render(req, res, "/LoginPage", {})
                 }
                 else {
-                    console.log(req.signedCookies)
+                 //   console.log(req.signedCookies)
                     app.render(req, res, "/Home", {})
 
                 }

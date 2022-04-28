@@ -32,7 +32,7 @@ export async function getStaticProps(context) {
   //const { params, query } = context
 
 
-  console.log("HOME========", context)
+  //console.log("HOME========", context)
 
   return {
     props: {},
@@ -76,7 +76,7 @@ export default function Home() {
           placeholder='blur'
           alt="iiiaa"
           blurDataURL="https://picsum.photos/200/300"
-          // unoptimized
+          unoptimized
           // width={200}
           // height={600}
           // style={{backgroundColor: "pink"}}
@@ -86,7 +86,19 @@ export default function Home() {
           referrerPolicy='no-referrer'
         />
       </Box>
-
+      <Image loader={myLoader}
+        src="https://wx3.sinaimg.cn/mw690/006nD01hgy1h1ls8p0fjoj32c02c04qq.jpg"
+        placeholder={"blur"}
+      //  alt="iiiaa"
+        blurDataURL="https://picsum.photos/200/300"
+        unoptimized
+        width={330}
+        height={430}
+        style={{backgroundColor: "pink"}}
+        objectFit='contain'
+        objectPosition='0px 0px'
+        referrerPolicy='no-referrer'
+      />
 
       <Link href="/About"><h1>go to about {count}</h1></Link>
       <Button onClick={function () {
@@ -140,7 +152,7 @@ export default function Home() {
           </a>
         </div>
       </main>
- 
+
       <footer className={styles.footer}>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
@@ -149,7 +161,9 @@ export default function Home() {
         >
           Powered by{' '}
           <span className={styles.logo}>
-            <Image src="/vercel.svg"
+            <Image
+              //src="../public/vercel.svg" // for export static page
+              src="vercel.svg"
               loader={myLoader}
               placeholder='blur'
               blurDataURL="/"
@@ -172,3 +186,7 @@ export default function Home() {
 
   )
 }
+
+
+
+

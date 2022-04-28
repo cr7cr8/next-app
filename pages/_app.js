@@ -6,7 +6,7 @@ import ThemeContextProvider from "../ThemeContextProvider"
 
 function MyApp({ Component, pageProps }) {
 
-  console.log(Component)
+  //console.log(Component)
 
   return (
     <ThemeContextProvider >
