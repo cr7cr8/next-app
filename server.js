@@ -50,7 +50,7 @@ app.prepare().then(
 
         express.get('/api', (req, res) => {
             res.send("api")
-        })
+        }) 
 
 
         express.get(/(^\/$)|(^\/home$)/i,
