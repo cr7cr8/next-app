@@ -10,7 +10,7 @@ export default function ThemeContextProvider({ cssBaseLine = true, ...props }) {
 
     const [sizeObj, setSizeObj] = useState(props.sizeObj || { xs: "1.5rem", sm: "1.5rem", md: "1.5rem", lg: "1.5rem", xl: "1.5rem" })
 
-
+ 
 
 
     const scaleSizeObj = useCallback((factor = 1) => {
